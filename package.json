@@ -2,14 +2,15 @@
   "name": "surreal-stack",
   "private": true,
   "type": "module",
-  "workspaces": [
-    "packages/surrealigrate",
-    "packages/surrealctl"
-  ],
   "scripts": {
     "build": "react-router build",
+    "db": "npx surrealctl start",
+    "predev": "npm run db",
     "dev": "cross-env NODE_ENV=development node server.js",
-    "start": "node server.js",
+    "migrate": "npx surrealdb migrate",
+    "prestart": "npm run db",
+    "start": "cross-env NODE_ENV=production node server.js",
+    "serve": "cross-env NODE_ENV=production node server.js",
     "typecheck": "react-router typegen && tsc -b"
   },
   "dependencies": {
@@ -42,7 +43,9 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router": "^7.5.3",
-    "recharts": "^2.15.4"
+    "recharts": "^2.15.4",
+    "surrealctl": "^1.1.1",
+    "surrealigrate": "^2.0.0"
   },
   "devDependencies": {
     "@react-router/dev": "^7.5.3",
